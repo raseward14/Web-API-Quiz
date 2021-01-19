@@ -4,8 +4,6 @@ var timeEl = document.querySelector("#timer");
 var mainEl = document.getElementById("main");
 var secondsLeft = 60;
 
-
-
 // start quiz function
 function startQuiz () {
     console.log("started quiz");
@@ -13,6 +11,7 @@ function startQuiz () {
     // start timer
     setTime();
     function setTime () {
+
         // set time interval
         var timerInterval = setInterval(function() {
             secondsLeft--;
@@ -24,7 +23,7 @@ function startQuiz () {
                 sendMessage();
                 timerInterval.textContent = "Timer: " + secondsLeft;
             }
-        }, 1000); // ever second run this code block
+        }, 1000); // every second run this code block
     }
 
     sendMessage();
