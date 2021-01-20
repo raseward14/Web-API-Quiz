@@ -41,9 +41,9 @@ header {
 }
 
 form.container {
-    visibility: hidde;
-    margin: auto;
+    margin: 80px auto;
     text-align: start;
+    display: none;
 }
 
 .card-contents {
@@ -69,4 +69,14 @@ h1 {
     text-align: center;
     font-size: 34px;
     font-weight: 700;
+}
+
+p {
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+
+#question {
+    text-align: left;
 }
