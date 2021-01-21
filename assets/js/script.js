@@ -2,11 +2,15 @@
 var startBtn = document.querySelector("#start");
 var timeEl = document.querySelector("#timer");
 var welcomeEl = document.getElementById("welcome");
-var formEl = document.querySelector("#form")
+var question1El = document.querySelector("#question1");
+var question2El = document.querySelector("#question2");
+var question3El = document.querySelector("#question3");
+var question4El = document.querySelector("#question4");
+var question5El = document.querySelector("#question5");
+
 
 var secondsLeft = 60;
 
-var pEl = document.querySelector("#question");
 var labelA = document.getElementById("option-a");
 var labelB = document.getElementById("option-b");
 var labelC = document.getElementById("option-c");
@@ -38,18 +42,50 @@ function startQuiz () {
     }
 
     function askQuestions() {
-        welcomeEl.setAttribute("style", "display: none;")
-        formEl.setAttribute("style", "display: block")
-        pEl.textContent = "Commonly used data types DO NOT include:";
-        labelA.textContent = "strings";
-        labelB.textContent = "booleans";
-        labelC.textContent = "alerts";
-        labelD.textContent = "numbers";
+        welcomeEl.setAttribute("style", "display: none;");
+        question1El.setAttribute("style", "display: block");
 
         if (labelC.checked) {
             myScore = myScore + 1;
+            question1El.setAttribute("style", "display: none");
+            question2El.setAttribute("style", "display: block");
+        } else {
+            secondsLeft = secondsLeft - 6;
+            question1El.setAttribute("style", "display: none");
+            question2El.setAttribute("style", "display: block");
         }
-        
+
+        if (labelC.checked) {
+            myScore = myScore + 1;
+            question2El.setAttribute("style", "display: none");
+            question3El.setAttribute("style", "display: block");
+        } else {
+            secondsLeft = secondsLeft - 6;
+            question2El.setAttribute("style", "display: none");
+            question3El.setAttribute("style", "display: block");
+        }
+
+        if (labelC.checked) {
+            myScore = myScore + 1;
+            question3El.setAttribute("style", "display: none");
+            question4El.setAttribute("style", "display: block");
+        } else {
+            secondsLeft = secondsLeft - 6;
+            question3El.setAttribute("style", "display: none");
+            question4El.setAttribute("style", "display: block");
+        }
+
+        if (labelC.checked) {
+            myScore = myScore + 1;
+            question4El.setAttribute("style", "display: none");
+            question5El.setAttribute("style", "display: block");
+        } else {
+            secondsLeft = secondsLeft - 6;
+            question4El.setAttribute("style", "display: none");
+            question5El.setAttribute("style", "display: block");
+        }
+
+
     }
 }
 

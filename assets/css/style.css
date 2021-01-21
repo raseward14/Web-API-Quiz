@@ -1,7 +1,7 @@
 * {
     outline-color: #ffdb3a;
     box-sizing: border-box;
-    border: 1px solid blac5;
+    /* border: 1px solid black; */
 }
 body {
     border: 5px solid #ffdb3a;
@@ -44,6 +44,7 @@ form.container {
     margin: 80px auto;
     text-align: start;
     display: none;
+    text-align: left;
 }
 
 .card-contents {
@@ -74,9 +75,4 @@ h1 {
 p {
     font-size: 20px;
     font-weight: bold;
-    
-}
-
-#question {
-    text-align: left;
 }
