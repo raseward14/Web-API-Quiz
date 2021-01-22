@@ -89,7 +89,7 @@ function startQuiz () {
         welcomeEl.setAttribute("style", "display: none;");
         questionEl.setAttribute("style", "display: block;");
         document.getElementById("question").setAttribute("style", "display: block;")
-        
+
         questionEl.textContent = questionArray[0].question;
         var optionA = document.getElementById("optionA");
         var optionB = document.getElementById("optionB");
