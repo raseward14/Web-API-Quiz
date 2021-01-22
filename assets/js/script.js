@@ -1,20 +1,64 @@
 // define variables
+var questionArray = [
+    {
+        question: "Commonly used data types DO NOT include:",
+        answers: {
+            a: "strings",
+            b: "booleans",
+            c: "alerts",
+            d: "numbers"
+        },
+        correct: "alerts"
+    },
+    {
+        question: "To select elements within an array, we use:",
+        answers: {
+            a: "variables",
+            b: "index",
+            c: "methods",
+            d: "numbers"
+        },
+        correct: "index"
+    },
+    {
+        question: "The condition in an if / else statement is enclosed within:",
+        answers: {
+            a: "parantheses",
+            b: "brackets",
+            c: "opening and closing tags",
+            d: "quotations"
+        },
+        correct: "parantheses"
+    },
+    {
+        question: "When being assigned to variables, string values must be enclosed within:",
+        answers: {
+            a: "parantheses",
+            b: "quotations",
+            c: "curly brackets",
+            d: "square brackets"
+        },
+        correct: "quotations"
+    },
+    {
+        question: "A very useful tool to use during development to print data to the console is:",
+        answers: {
+            a: "query selectors",
+            b: "relative file paths",
+            c: "bootstrap",
+            d: "console log"
+        },
+        correct: "console log"
+    }
+]
+
+var welcomeEl = document.getElementById("welcome");
+var questionEl = document.querySelector("#question");
 var startBtn = document.querySelector("#start");
 var timeEl = document.querySelector("#timer");
-var welcomeEl = document.getElementById("welcome");
-var question1El = document.querySelector("#question1");
-var question2El = document.querySelector("#question2");
-var question3El = document.querySelector("#question3");
-var question4El = document.querySelector("#question4");
-var question5El = document.querySelector("#question5");
-
+var questionCounter = 0;
 
 var secondsLeft = 60;
-
-var labelA = document.getElementById("option-a");
-var labelB = document.getElementById("option-b");
-var labelC = document.getElementById("option-c");
-var labelD = document.getElementById("option-d");
 
 var myScore = 0;
 
@@ -43,48 +87,21 @@ function startQuiz () {
 
     function askQuestions() {
         welcomeEl.setAttribute("style", "display: none;");
-        question1El.setAttribute("style", "display: block");
+        questionEl.setAttribute("style", "display: block;");
+        document.getElementById("question").setAttribute("style", "display: block;")
+        
+        questionEl.textContent = questionArray[0].question;
+        var optionA = document.getElementById("optionA");
+        var optionB = document.getElementById("optionB");
+        var optionC = document.getElementById("optionC");
+        var optionD = document.getElementById("optionD");
 
-        if (labelC.checked) {
-            myScore = myScore + 1;
-            question1El.setAttribute("style", "display: none");
-            question2El.setAttribute("style", "display: block");
-        } else {
-            secondsLeft = secondsLeft - 6;
-            question1El.setAttribute("style", "display: none");
-            question2El.setAttribute("style", "display: block");
-        }
+        optionA.value = questionArray[questionCounter].answers.a
+        optionB.value = questionArray[questionCounter].answers.b
+        optionC.value = questionArray[questionCounter].answers.c
+        optionD.value = questionArray[questionCounter].answers.d
 
-        if (labelC.checked) {
-            myScore = myScore + 1;
-            question2El.setAttribute("style", "display: none");
-            question3El.setAttribute("style", "display: block");
-        } else {
-            secondsLeft = secondsLeft - 6;
-            question2El.setAttribute("style", "display: none");
-            question3El.setAttribute("style", "display: block");
-        }
-
-        if (labelC.checked) {
-            myScore = myScore + 1;
-            question3El.setAttribute("style", "display: none");
-            question4El.setAttribute("style", "display: block");
-        } else {
-            secondsLeft = secondsLeft - 6;
-            question3El.setAttribute("style", "display: none");
-            question4El.setAttribute("style", "display: block");
-        }
-
-        if (labelC.checked) {
-            myScore = myScore + 1;
-            question4El.setAttribute("style", "display: none");
-            question5El.setAttribute("style", "display: block");
-        } else {
-            secondsLeft = secondsLeft - 6;
-            question4El.setAttribute("style", "display: none");
-            question5El.setAttribute("style", "display: block");
-        }
-
+        document.querySelector("label[for='optionA']").textContent = questionArray[0].answers.a
 
     }
 }
