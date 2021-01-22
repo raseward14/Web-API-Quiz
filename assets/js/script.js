@@ -56,7 +56,7 @@ var welcomeEl = document.getElementById("welcome");
 var questionEl = document.querySelector("#question");
 var startBtn = document.querySelector("#start");
 var timeEl = document.querySelector("#timer");
-var questionCounter = 0;
+var questionCounter1 = questionArray[0];
 
 var secondsLeft = 60;
 
@@ -96,12 +96,15 @@ function startQuiz () {
         var optionC = document.getElementById("optionC");
         var optionD = document.getElementById("optionD");
 
-        optionA.value = questionArray[questionCounter].answers.a
-        optionB.value = questionArray[questionCounter].answers.b
-        optionC.value = questionArray[questionCounter].answers.c
-        optionD.value = questionArray[questionCounter].answers.d
+        optionA.value = questionCounter1.answers.a
+        optionB.value = questionCounter1.answers.b
+        optionC.value = questionCounter1.answers.c
+        optionD.value = questionCounter1.answers.d
 
-        document.querySelector("label[for='optionA']").textContent = questionArray[0].answers.a
+        optionA.textContent = optionA.value
+        optionB.textContent = optionB.value
+        optionC.textContent = optionC.value
+        optionD.textContent = optionD.value
 
     }
 }
