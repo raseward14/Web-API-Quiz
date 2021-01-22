@@ -63,7 +63,7 @@ var secondsLeft = 60;
 var myScore = 0;
 
 // start quiz function
-function startQuiz () {
+function startQuiz() {
     console.log("started quiz");
 
     // start timer
@@ -71,10 +71,10 @@ function startQuiz () {
     function setTime() {
 
         // set time interval
-        var timerInterval = setInterval(function() {
+        var timerInterval = setInterval(function () {
             secondsLeft--;
             timeEl.textContent = "Timer: " + secondsLeft;
-            
+
             // if timer hits zero, end quiz
             if (secondsLeft === 0) {
                 clearInterval(timerInterval);
@@ -89,6 +89,11 @@ function startQuiz () {
         welcomeEl.setAttribute("style", "display: none;");
         questionEl.setAttribute("style", "display: block;");
         document.getElementById("question").setAttribute("style", "display: block;")
+
+        function setCounterText() {
+            // var myScoreEl = document.getElementById("#score")
+            // myScoreEl.textContent = myScore.value
+        };
 
         questionEl.textContent = questionArray[0].question;
         var optionA = document.getElementById("optionA");
@@ -105,6 +110,27 @@ function startQuiz () {
         optionB.textContent = optionB.value
         optionC.textContent = optionC.value
         optionD.textContent = optionD.value
+
+        optionC.addEventListener("click", function () {
+
+            if (optionC) {
+                // if user choice === correct answer, add 1 to myScore
+                myScore += 1;
+                setCounterText();
+                console.log("myScore");
+                // display an span correct
+                // move to next question  
+            } else if (
+                (optionA) ||
+                (optionB) ||
+                (optionD)
+            ) {
+                // subtract 5 seconds
+                // move to next quesion
+                secondsLeft = secondsLeft - 5;
+            }
+
+        })
 
     }
 }
