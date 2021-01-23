@@ -27,7 +27,7 @@ header {
     min-height: 84vh;
 }
 
-.container {
+div.container div.card-contents {
     display: block;
     position: relative;
     cursor: pointer;
@@ -38,20 +38,10 @@ header {
     transition: 0.3s;
     width: 40vw;
     background-color:#dfe6e9;
-}
-
-form.container {
-    margin: 80px auto;
-    text-align: start;
-    display: none;
-    text-align: left;
-}
-
-.card-contents {
     padding: 5px 5px 10px 5px;
 }
 
-button {
+div.container div.card-contents button {
     padding: 10px;
     margin: 24px;
     cursor: pointer;
@@ -59,6 +49,54 @@ button {
     background-color: #6c5ce7;
     color: white;
     border-radius: 5px;
+}
+
+div.container div.card-contents button:hover {
+    color: #6c5ce7;
+    background: azure ;
+    background-color: azure;
+}
+
+div.container div#question-container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    margin: 80px auto;
+    padding: 5px 20px;
+    text-align: left;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40vw;
+    background-color:#dfe6e9; 
+}
+
+div.container div#question-container div#question {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 30px 20px;
+    text-align: start;
+    text-align: left;
+    align-content: left;
+    padding: 0, 30px;
+}
+
+div.container div#question-container button {
+    padding: 1px 30px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 24px;
+    background: rgb(196, 137, 235);
+    color: black;
+    border-radius: 5px;
+    border: 1px solid #6c5ce7;
+    text-align: left;
+}
+
+div.container div#question-container button:hover {
+    color: #6c5ce7;
+    background: azure;
+    background-color:azure;
 }
 
 div a, h2 {
@@ -72,7 +110,7 @@ h1 {
     font-weight: 700;
 }
 
-div#question {
-    font-size: 20px;
-    font-weight: bold;
-}
+
+
+
+

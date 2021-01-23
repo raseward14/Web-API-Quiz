@@ -56,11 +56,12 @@ var welcomeEl = document.getElementById("welcome");
 var questionEl = document.querySelector("#question");
 var startBtn = document.querySelector("#start");
 var timeEl = document.querySelector("#timer");
+var myScore = document.querySelector("#my-score")
 var questionCounter1 = questionArray[0];
 
 var secondsLeft = 60;
 
-var myScore = 0;
+myScore = 0;
 
 // start quiz function
 function startQuiz() {
