@@ -25,6 +25,8 @@ header {
 .wrapper {
     padding-top: 0px;
     min-height: 84vh;
+    display: block;
+    position: relative;
 }
 
 div.container div.card-contents {
@@ -57,8 +59,8 @@ div.container div.card-contents button:hover {
     background-color: azure;
 }
 
-div.container div#question-container {
-    display: block;
+div#question-container {
+    display: none;
     position: relative;
     cursor: pointer;
     margin: 80px auto;
@@ -70,7 +72,7 @@ div.container div#question-container {
     background-color:#dfe6e9; 
 }
 
-div.container div#question-container div#question {
+div#question-container.container div#question {
     font-size: 30px;
     font-weight: bold;
     margin: 30px 20px;
@@ -80,7 +82,7 @@ div.container div#question-container div#question {
     padding: 0, 30px;
 }
 
-div.container div#question-container button {
+div#question-container.container button {
     padding: 1px 30px;
     margin-bottom: 15px;
     cursor: pointer;
@@ -93,7 +95,7 @@ div.container div#question-container button {
     text-align: left;
 }
 
-div.container div#question-container button:hover {
+div#question-container.container button:hover {
     color: #6c5ce7;
     background: azure;
     background-color:azure;
@@ -108,6 +110,10 @@ h1 {
     text-align: center;
     font-size: 34px;
     font-weight: 700;
+}
+
+.hide {
+    display: none;
 }
 
 

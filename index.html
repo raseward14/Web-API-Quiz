@@ -21,7 +21,7 @@
   <!--header highscores link and timer-->
   <header>
     <div class="row">
-      <a id="highscores" class="col-xl-6" href="">View Highscores</a>
+      <a id="highscores" class="col-xl-6" href="highscores.html" target="null">View Highscores</a>
       <h2 id="timer" class="col-xl-6">Timer: 60</h2>
     </div>
   </header>
@@ -32,26 +32,43 @@
       <!--welcome screen with start button-->
       <div class="card-contents">
         <h1>Coding Challenge Quiz</h1>
-        <p>Click the start button to see how much you know about coding!</p>
+        <p>Click the start button to answer the following code-related questions within the time limit. Incorrect
+          answers will penalize your time by ten seconds!</p>
         <button id="start">Start</button>
       </div>
     </div>
 
     <!--quiz question template-->
-    <div class="container">
-      <div id="question-container">
-        <div id="question"></div>
-        <button id="optionA" name="question-name"></button>
+    <div id="question-container" class="container">
+      <div id="question"></div>
+      <div id="answer-buttons">
+        <button class="btn" id="optionA"  name="question-name"></button>
         <br>
-        <button id="optionB" name="question-name"></button>
+        <button class="btn" id="optionB"  name="question-name"></button>
         <br>
-        <button id="optionC" name="question-name"></button>
+        <button class="btn" id="optionC" name="question-name"></button>
         <br>
-        <button id="optionD" name="question-name"></button>
+        <button class="btn" id="optionD" name="question-name"></button>
         <br>
       </div>
     </div>
 
+    <div class="hide container">
+      <div id="done" class="card-contents"></div>
+      <h1>You're Done!</h1>
+      <form>
+        <div>Enter initials:</div>
+        <input placeholder="initials" id="initials" />
+        <button id="submit">Submit</button>
+        <div>
+          <h3 id="response"></h3>
+        </div>
+      </form>
+    </div>
+    </div>
+
+
+    <!-- your score -->
     <h2>Score: <span id="my-score">0</span></h2>
 
   </main>
@@ -71,7 +88,7 @@
     -->
 
   <!-- my javascript -->
-  <script src="assets/js/script.js"></script>
+  <script src="assets/js/script2.js"></script>
 
 </body>
 

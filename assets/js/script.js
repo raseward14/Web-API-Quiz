@@ -58,10 +58,8 @@ var startBtn = document.querySelector("#start");
 var timeEl = document.querySelector("#timer");
 var myScore = document.querySelector("#my-score")
 var questionCounter1 = questionArray[0];
-
 var secondsLeft = 60;
-
-myScore = 0;
+var count = 0;
 
 // start quiz function
 function startQuiz() {
@@ -89,12 +87,7 @@ function startQuiz() {
     function askQuestions() {
         welcomeEl.setAttribute("style", "display: none;");
         questionEl.setAttribute("style", "display: block;");
-        document.getElementById("question").setAttribute("style", "display: block;")
-
-        function setCounterText() {
-            // var myScoreEl = document.getElementById("#score")
-            // myScoreEl.textContent = myScore.value
-        };
+        document.getElementById("question").setAttribute("style", "display: block;");
 
         questionEl.textContent = questionArray[0].question;
         var optionA = document.getElementById("optionA");
@@ -116,10 +109,8 @@ function startQuiz() {
 
             if (optionC) {
                 // if user choice === correct answer, add 1 to myScore
-                myScore += 1;
                 setCounterText();
-                console.log("myScore");
-                // display an span correct
+                console.log(myScore);
                 // move to next question  
             } else if (
                 (optionA) ||
@@ -127,11 +118,16 @@ function startQuiz() {
                 (optionD)
             ) {
                 // subtract 5 seconds
-                // move to next quesion
                 secondsLeft = secondsLeft - 5;
+                // move to next quesion
             }
 
         })
+
+        function setCounterText() {
+            count =+ 1;
+            myScore.textContent = count;
+        };
 
     }
 }
