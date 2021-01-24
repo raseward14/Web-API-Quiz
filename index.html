@@ -32,7 +32,8 @@
       <!--welcome screen with start button-->
       <div class="card-contents">
         <h1>Coding Challenge Quiz</h1>
-        <p>Click the start button to answer the following code-related questions within the time limit. Incorrect
+        <p class="font">Click the start button to answer the following code-related questions within the time limit.
+          Incorrect
           answers will penalize your time by ten seconds!</p>
         <button id="start">Start</button>
       </div>
@@ -42,34 +43,33 @@
     <div id="question-container" class="container">
       <div id="question"></div>
       <div id="answer-buttons">
-        <button class="btn" id="optionA"  name="question-name"></button>
+        <button class="btn" id="optionA" name="question-name">1</button>
         <br>
-        <button class="btn" id="optionB"  name="question-name"></button>
+        <button class="btn" id="optionB" name="question-name">2</button>
         <br>
-        <button class="btn" id="optionC" name="question-name"></button>
+        <button class="btn" id="optionC" name="question-name">3</button>
         <br>
-        <button class="btn" id="optionD" name="question-name"></button>
+        <button class="btn" id="optionD" name="question-name">4</button>
         <br>
       </div>
     </div>
 
-    <div class="hide container">
-      <div id="done" class="card-contents"></div>
-      <h1>You're Done!</h1>
+    <!-- score template -->
+    <div id="score-container" class=" container">
+      <div class="card-contents"></div>
+      <h1 id="done">You're Done!</h1>
       <form>
-        <div>Enter initials:</div>
-        <input placeholder="initials" id="initials" />
-        <button id="submit">Submit</button>
+        <!-- your score -->
+        <h2>Score: <span class="font" id="my-score">0</span></h2>
+        <div class="font">Enter initials:</div>
+        <input placeholder="initials" id="initials" /><br>
+        <button id="submit" class="btn">Submit</button>
         <div>
           <h3 id="response"></h3>
         </div>
       </form>
     </div>
     </div>
-
-
-    <!-- your score -->
-    <h2>Score: <span id="my-score">0</span></h2>
 
   </main>
 

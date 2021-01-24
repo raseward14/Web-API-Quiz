@@ -2,73 +2,61 @@
 var questionArray = [
     {
         question: "Commonly used data types DO NOT include:",
-        answers: {
-            a: "strings",
-            b: "booleans",
-            c: "alerts",
-            d: "numbers"
-        },
-        correct: "alerts"
+        answers: [
+            { text: "strings", correct: false },
+            { text: "booleans", correct: false },
+            { text: "alerts", correct: true },
+            { text: "numbers", correct: false }
+        ]
     },
     {
         question: "To select elements within an array, we use:",
-        answers: {
-            a: "variables",
-            b: "index",
-            c: "methods",
-            d: "numbers"
-        },
-        correct: "index"
+        answers: [
+            { text: "variables", correct: false },
+            { text: "index", correct: true },
+            { text: "methods", correct: false },
+            { text: "numbers", correct: false }
+        ]
     },
     {
         question: "The condition in an if / else statement is enclosed within:",
-        answers: {
-            a: "parantheses",
-            b: "brackets",
-            c: "opening and closing tags",
-            d: "quotations"
-        },
-        correct: "parantheses"
+        answers: [
+            { text: "parantheses", correct: true },
+            { text: "brackets", correct: false },
+            { text: "opening and closing tags", correct: false },
+            { text: "quotations", correct: false }
+        ]
     },
     {
         question: "When being assigned to variables, string values must be enclosed within:",
-        answers: {
-            a: "parantheses",
-            b: "quotations",
-            c: "curly brackets",
-            d: "square brackets"
-        },
-        correct: "quotations"
+        answers: [
+            { text: "parantheses", correct: false },
+            { text: "quotations", correct: true },
+            { text: "curly brackets", correct: false },
+            { text: "square brackets", correct: false }
+        ]
     },
     {
         question: "A very useful tool to use during development to print data to the console is:",
-        answers: {
-            a: "query selectors",
-            b: "relative file paths",
-            c: "bootstrap",
-            d: "console log"
-        },
-        correct: "console log"
+        answers: [
+            { text: "query selectors", correct: false },
+            { text: "relative file paths", correct: false },
+            { text: "bootstrap", correct: false },
+            { text: "console log", correct: true }
+        ]
     }
 ]
 
 var welcomeEl = document.getElementById("welcome");
 var questionContainerEl = document.getElementById("question-container");
 var questionEl = document.getElementById("question");
-var optionA = document.getElementById("optionA");
-var optionB = document.getElementById("optionB");
-var optionC = document.getElementById("optionC");
-var optionD = document.getElementById("optionD");
-var answerButtonsElement = document.querySelectorAll(".btn");
+var answerButtons = document.getElementById("answer-buttons")
+var button1 = document.querySelectorAll(".btn");
 var startBtn = document.getElementById("start");
 var timeEl = document.querySelector("#timer");
 var myScore = document.querySelector("#my-score")
 var done = document.getElementById("done")
-var question1 = questionArray[0];
-var question2 = questionArray[2];
-var question2 = questionArray[3];
-var question2 = questionArray[4];
-var question2 = questionArray[5];
+var sortedQuestions, questionIndex, timerInterval;
 
 var count = 0;
 var secondsLeft = 60;
@@ -77,202 +65,114 @@ var secondsLeft = 60;
 startBtn.addEventListener("click", startQuiz);
 console.log("hey, good luck! Hope you studied..");
 
+// rotate through question index on clicks, prompt new question
+answerButtons.addEventListener("click", () => {
+    questionIndex++;
+    askQuestion();
+})
+
 // start quiz function
 function startQuiz() {
     console.log("started quiz");
     // start timer, hide welcome, show questions
     questionContainerEl.setAttribute("style", "display: block;");
     welcomeEl.classList.add("hide");
+
+    // random questions starting at index 0
+    sortedQuestions = questionArray.sort(() => Math.random() - .5);
+    questionIndex = 0;
+
+    // ask question and start time
+    askQuestion();
     setTime();
-    askQuestion1();
 }
 
 function setTime() {
     // set time interval
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = "Timer: " + secondsLeft;
-        // if timer hits zero, end quiz
+        // if timer hits zero, end quiz, show report
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
-            alert("Times up! Click OK to see your score.")
             timerInterval.textContent = "Timer: " + secondsLeft;
+            questionContainerEl.setAttribute("style", "display: none;");
+            report.setAttribute("style", "display: block;");
         }
     }, 1000); // every second run this code block
 }
 
-function askQuestion1() {
-    questionEl.textContent = question1.question;
-    optionA.value = question1.answers.a
-    optionB.value = question1.answers.b
-    optionC.value = question1.answers.c
-    optionD.value = question1.answers.d
-
-    optionA.textContent = optionA.value
-    optionB.textContent = optionB.value
-    optionC.textContent = optionC.value
-    optionD.textContent = optionD.value
-
-    
-    optionC.addEventListener("click", function () {
-        if (optionC) {
-            // if user choice === correct answer, add 1 to myScore
-            setCounterText();
-            console.log(myScore);
-            askQuestion2();  
-        } else if (
-            (optionA) ||
-            (optionB) ||
-            (optionD)
-        ) {
-            // subtract 5 seconds
-            secondsLeft = secondsLeft - 5;
-            // move to next quesion
-            askQuestion2();
-        }
-    });
+// display a question, and reset the prior question
+function askQuestion() {
+    resetState();
+    showQuestion(sortedQuestions[questionIndex]);
 }
 
-function askQuestion2() {
-    questionEl.textContent = question2.question;
-    optionA.value = question2.answers.a
-    optionB.value = question2.answers.b
-    optionC.value = question2.answers.c
-    optionD.value = question2.answers.d
-
-    optionA.textContent = optionA.value
-    optionB.textContent = optionB.value
-    optionC.textContent = optionC.value
-    optionD.textContent = optionD.value
-
-    answerButtonsElement.onclick = function() {
-        if (optionC) {
-            // if user choice === correct answer, add 1 to myScore
-            setCounterText();
-            console.log(myScore);
-            askQuestion3();  
-        } else if (
-            (optionA) ||
-            (optionB) ||
-            (optionD)
-        ) {
-            // subtract 5 seconds
-            secondsLeft = secondsLeft - 5;
-            // move to next quesion
-            askQuestion3();
+// display question
+function showQuestion(questionArray) {
+    // text for question id
+    questionEl.innerText = questionArray.question;
+    // create button for each answer
+    questionArray.answers.forEach(answers => {
+        var button = document.createElement("button");
+        // button text comes from answers array
+        button.innerText = answers.text;
+        // style button
+        button.classList.add("btn");
+        if (answers.correct) {
+            button.dataset.correct = answers.correct;
         }
+
+        // run function to see if user choice is correct
+        button.addEventListener("click", chooseCorrect);
+        answerButtons.appendChild(button);
+    })
+}
+
+// remove previous button elements while prior buttons exhist
+function resetState() {
+    while (answerButtons.firstChild) {
+        answerButtons.removeChild(answerButtons.firstChild)
     }
 }
 
-function askQuestion3() {
-    questionEl.textContent = question3.question;
-    optionA.value = question3.answers.a
-    optionB.value = question3.answers.b
-    optionC.value = question3.answers.c
-    optionD.value = question3.answers.d
-
-    optionA.textContent = optionA.value
-    optionB.textContent = optionB.value
-    optionC.textContent = optionC.value
-    optionD.textContent = optionD.value
-
-    answerButtonsElement.onclick = function() {
-        if (optionC) {
-            // if user choice === correct answer, add 1 to myScore
-            setCounterText();
-            console.log(myScore);
-            askQuestion4();  
-        } else if (
-            (optionA) ||
-            (optionB) ||
-            (optionD)
-        ) {
-            // subtract 5 seconds
-            secondsLeft = secondsLeft - 5;
-            // move to next quesion
-            askQuestion4();
-        }
+// check to see if user choice is correct
+function chooseCorrect(e) {
+    // set variable for user choice and for correct answer
+    var userChoice = e.target;
+    var correct = userChoice.dataset.correct;
+    // for each response, decrease time by 5 seconds, or increase score
+    responseResult(document.body, correct);
+    Array.from(answerButtons.children).forEach(button => {
+    })
+    if (sortedQuestions.length > questionIndex + 1) {
+        questionContainerEl.setAttribute("style", "display: block;");
+    } else {
+        questionContainerEl.setAttribute("style", "display: none;");
+        report.setAttribute("style", "display: block;")
     }
 }
 
-function askQuestion4() {
-    questionEl.textContent = question4.question;
-    optionA.value = question4.answers.a
-    optionB.value = question4.answers.b
-    optionC.value = question4.answers.c
-    optionD.value = question4.answers.d
-
-    optionA.textContent = optionA.value
-    optionB.textContent = optionB.value
-    optionC.textContent = optionC.value
-    optionD.textContent = optionD.value
-
-    answerButtonsElement.onclick = function() {
-        if (optionC) {
-            // if user choice === correct answer, add 1 to myScore
-            setCounterText();
-            console.log(myScore);
-            askQuestion5();  
-        } else if (
-            (optionA) ||
-            (optionB) ||
-            (optionD)
-        ) {
-            // subtract 5 seconds
-            secondsLeft = secondsLeft - 5;
-            // move to next quesion
-            askQuestion5();
-        }
+function responseResult(element, correct) {
+    // clearStatusClass(element)
+    if (correct) {
+        // increase count by 1, multiply by 20 and add %
+        count++;
+        myScore.textContent = count * 20 + "%";
+        console.log("correct");
+    } else {
+        // decrease the seconds left variable by 5 seconds
+        secondsLeft -= 5;
+        timerInterval.textContent = "Timer: " + secondsLeft;
     }
 }
 
-function askQuestion5() {
-    questionEl.textContent = question5.question;
-    optionA.value = question5.answers.a
-    optionB.value = question5.answers.b
-    optionC.value = question5.answers.c
-    optionD.value = question5.answers.d
-
-    optionA.textContent = optionA.value
-    optionB.textContent = optionB.value
-    optionC.textContent = optionC.value
-    optionD.textContent = optionD.value
-
-    answerButtonsElement.onclick = function() {
-        if (optionC) {
-            // if user choice === correct answer, add 1 to myScore
-            setCounterText();
-            console.log(myScore);
-            showScore;  
-        } else if (
-            (optionA) ||
-            (optionB) ||
-            (optionD)
-        ) {
-            // subtract 5 seconds
-            secondsLeft = secondsLeft - 5;
-            // move to next show score
-            showScore();
-        }
-    }
-}
-
-function setCounterText() {
-    count = + 1;
-    myScore.textContent = count;
-};
-
-var submitEl = document.querySelector("#submit");
+var submitButton = document.querySelector("#submit");
 var initialsInput = document.querySelector("#initials");
 var submissionResponseEl = document.querySelector("#response");
+var report = document.getElementById("score-container")
 
 // submit your score
-submitEl.addEventListener("click", showScore);
-
-function showScore(event) {
+submit.addEventListener("click", function (event) {
     event.preventDefault();
-    done.classList.remove("hide");
-    setCounterText();
-    var response = "Thank you for your submission " + initialsInput.value + "! We will reach out to you at " + ".";
-    submissionResponseEl.textContent = response;
-};
+})
