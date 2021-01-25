@@ -4,7 +4,7 @@
 The user clicks start to begin a coding quiz that automatically runs through an array of 5 code related questions. The quiz is timed, giving the user 1 minute to answer all questions. Each question automatically creates a button for each response. A correct response increases the user's score by 1, and an incorrect response decreases the time allotted by 5 seconds. Once time expires, or all the questions have been answered, the question box disappears, and a results box appears prompting the user to enter their initials, and displaying their score. Once a score is submitted, it is saved to a high score link where new users can see past highscores. 
 
 Vanilla Javascript is the primary language used. However, CSS, HTML, and Bootstrap are all integrated. You will see two script files, my first attempt included populating questions and responses individually by assigning variables to each response. This made navigating from question to question challenging. The second file shows a function that does this, with a different array structure. The last challenge I am still working through is saving user scores to a seperate highscores HTML.
-**[Check it out Here!](https://raseward14.github.io/Password-Generator/)**
+**[Check it out Here!](https://raseward14.github.io/Web-API-Quiz/)**
 
 The remaining challenges came from Javascript syntax required to tie in the HTML document.
 
@@ -15,7 +15,7 @@ The remaining challenges came from Javascript syntax required to tie in the HTML
 
 ## Usage
 * **The Finished Product**  
-![Random Password Generator](assets/images/snapshot.png)
+![Coding Quiz](assets/images/snapshot.PNG)
 
 ## Credits
 Here are a few resources that helped me get this project knocked out!
