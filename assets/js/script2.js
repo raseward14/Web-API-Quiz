@@ -63,7 +63,7 @@ var secondsLeft = 60;
 
 // start button to begin quiz
 startBtn.addEventListener("click", startQuiz);
-console.log("hey, good luck! Hope you studied..");
+console.log("hey, good luck! hope you studied..");
 
 // rotate through question index on clicks, prompt new question
 answerButtons.addEventListener("click", () => {
@@ -85,6 +85,7 @@ function startQuiz() {
     // ask question and start time
     askQuestion();
     setTime();
+
 }
 
 function setTime() {
@@ -122,7 +123,6 @@ function showQuestion(questionArray) {
         if (answers.correct) {
             button.dataset.correct = answers.correct;
         }
-
         // run function to see if user choice is correct
         button.addEventListener("click", chooseCorrect);
         answerButtons.appendChild(button);
@@ -149,23 +149,22 @@ function chooseCorrect(e) {
         questionContainerEl.setAttribute("style", "display: block;");
     } else {
         questionContainerEl.setAttribute("style", "display: none;");
-        report.setAttribute("style", "display: block;")
+        report.setAttribute("style", "display: block;");
     }
 }
 
 function responseResult(element, correct) {
-    // clearStatusClass(element)
     if (correct) {
         // increase count by 1, multiply by 20 and add %
         count++;
         myScore.textContent = count * 20 + "%";
         console.log("correct");
-        responseEl.innerText = "Correct!";
+        responseEl.textContent = "Correct!";
     } else {
         // decrease the seconds left variable by 5 seconds
         secondsLeft -= 5;
         timerInterval.textContent = "Timer: " + secondsLeft;
-        responseEl.innerText = "Wrong!";
+        responseEl.textContent = "Wrong!";
     }
 }
 

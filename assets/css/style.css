@@ -8,6 +8,10 @@ body {
     display: block;   
 }
 
+.push {
+    height: 55vh;
+}
+
 header {
     display: block;
     text-align: center;
