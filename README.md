@@ -15,7 +15,7 @@ The remaining challenges came from Javascript syntax required to tie in the HTML
 
 ## Usage
 * **The Finished Product**  
-![Random Password Generator](assets/images/snapshot.png)
+![Coding Quiz](assets/images/snapshot.png)
 
 ## Credits
 Here are a few resources that helped me get this project knocked out!
