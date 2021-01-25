@@ -55,7 +55,7 @@ var button1 = document.querySelectorAll(".btn");
 var startBtn = document.getElementById("start");
 var timeEl = document.querySelector("#timer");
 var myScore = document.querySelector("#my-score")
-var done = document.getElementById("done")
+var responseEl = document.querySelector("#response");
 var sortedQuestions, questionIndex, timerInterval;
 
 var count = 0;
@@ -160,19 +160,60 @@ function responseResult(element, correct) {
         count++;
         myScore.textContent = count * 20 + "%";
         console.log("correct");
+        responseEl.innerText = "Correct!";
     } else {
         // decrease the seconds left variable by 5 seconds
         secondsLeft -= 5;
         timerInterval.textContent = "Timer: " + secondsLeft;
+        responseEl.innerText = "Wrong!";
     }
 }
 
 var submitButton = document.querySelector("#submit");
 var initialsInput = document.querySelector("#initials");
-var submissionResponseEl = document.querySelector("#response");
-var report = document.getElementById("score-container")
+var report = document.getElementById("score-container");
+var userInitialsSpan = document.getElementById("user-initials");
+var userScoreSpan = document.getElementById("user-score");
+var highsScoresList = document.getElementById("highscore-list");
 
-// submit your score
+function init() {
+    var storedHighScores = JSON.parse(localStorage.getItem("userScore"));
+    if (storedHIghScores !== null) {
+        userScoreSpan === storedHighScores
+    }
+}
+
+// // save last score
+function saveLastScore() {
+    var userScore = {
+        initial: initialsInput.value,
+        score: myScore.value
+    }
+    localStorage.setItem("userScore", JSON.stringify(userScore)); 
+}
+
+// // display high score
+function renderHighScores() {
+
+    var score = localStorage.getItem("score");
+    var name = localStorage.getItem("initials");
+
+    userInitialsSpan.textContent = name;
+    userScoreSpan.textContent = score;
+}
+
+// // submit your score
 submit.addEventListener("click", function (event) {
     event.preventDefault();
+
+    // set variables for what will be saved
+    var score = myScore.textContent;
+    var name = initialsInput.value;
+
+    // save initials and score
+    localStorage.setItem("score", score);
+    localStorage.setItem("initials", name);
+
+    renderHighScores();
+    saveLastScore();
 })
