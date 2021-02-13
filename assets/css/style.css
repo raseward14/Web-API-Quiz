@@ -5,7 +5,8 @@
 body {
     border: 5px solid #ffdb3a;
     background-color: #eff5f8;
-    display: block;   
+    display: block;
+    min-height: 100vh;   
 }
 
 .push {
@@ -27,7 +28,6 @@ header {
 
 .wrapper {
     padding-top: 0px;
-    min-height: 84vh;
     display: block;
     position: relative;
 }

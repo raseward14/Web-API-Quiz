@@ -28,8 +28,8 @@
 
   <main class="wrapper">
 
+    <!--welcome screen with start button-->
     <div id="welcome" class="container">
-      <!--welcome screen with start button-->
       <div class="card-contents">
         <h1>Coding Challenge Quiz</h1>
         <p class="font">Click the start button to answer the following code-related questions within the time limit.
@@ -42,6 +42,9 @@
     <!--quiz question template-->
     <div id="question-container" class="container">
       <div id="question"></div>
+      <hr>
+      <div id="response"></div>
+      <hr>
       <div id="answer-buttons">
         <button class="btn" id="optionA" name="question-name">1</button>
         <br>
@@ -51,8 +54,6 @@
         <br>
         <button class="btn" id="optionD" name="question-name">4</button>
         <br>
-        <hr>
-        <div id="response">text</div>
       </div>
     </div>
 
@@ -60,7 +61,7 @@
     <div id="score-container" class=" container">
       <div class="card-contents">
         <h1>You're Done!</h1>
-        <form>
+        <form id="highscores-form" method="POST">
           <!-- your score -->
           <p class="font">Score: <span class="font" id="my-score">0</span></p>
           <p class="font">Enter initials:</p>
@@ -70,8 +71,6 @@
       </div>
     </div>
     </div>
-
-    
 
   </main>
 

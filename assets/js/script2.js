@@ -57,7 +57,7 @@ var timeEl = document.querySelector("#timer");
 var myScore = document.querySelector("#my-score")
 var responseEl = document.querySelector("#response");
 var sortedQuestions, questionIndex, timerInterval;
-
+var report = document.getElementById("score-container");
 var count = 0;
 var secondsLeft = 60;
 
@@ -67,9 +67,16 @@ console.log("hey, good luck! hope you studied..");
 
 // rotate through question index on clicks, prompt new question
 answerButtons.addEventListener("click", () => {
-    questionIndex++;
-    askQuestion();
-})
+    // if another question exists, ask it, otherwise, end game
+    if (questionIndex < questionArray.length) {
+        questionIndex++;
+        askQuestion();
+        console.log(questionArray.length)
+    } else {
+        stopPropagation();
+    };
+
+});
 
 // start quiz function
 function startQuiz() {
@@ -79,7 +86,6 @@ function startQuiz() {
     welcomeEl.classList.add("hide");
 
     // random questions starting at index 0
-    sortedQuestions = questionArray.sort(() => Math.random() - .5);
     questionIndex = 0;
 
     // ask question and start time
@@ -94,19 +100,24 @@ function setTime() {
         secondsLeft--;
         timeEl.textContent = "Timer: " + secondsLeft;
         // if timer hits zero, end quiz, show report
-        if (secondsLeft === 0) {
+        if (secondsLeft != null) {
+            // keep running
+        } else if (condition) {
+            
+        } if (secondsLeft === 0) {
             clearInterval(timerInterval);
             timerInterval.textContent = "Timer: " + secondsLeft;
             questionContainerEl.setAttribute("style", "display: none;");
             report.setAttribute("style", "display: block;");
         }
+
     }, 1000); // every second run this code block
 }
 
 // display a question, and reset the prior question
 function askQuestion() {
     resetState();
-    showQuestion(sortedQuestions[questionIndex]);
+    showQuestion(questionArray[questionIndex]);
 }
 
 // display question
@@ -134,6 +145,7 @@ function resetState() {
     while (answerButtons.firstChild) {
         answerButtons.removeChild(answerButtons.firstChild)
     }
+    console.log(questionIndex);
 }
 
 // check to see if user choice is correct
@@ -143,9 +155,11 @@ function chooseCorrect(e) {
     var correct = userChoice.dataset.correct;
     // for each response, decrease time by 5 seconds, or increase score
     responseResult(document.body, correct);
+
     Array.from(answerButtons.children).forEach(button => {
     })
-    if (sortedQuestions.length > questionIndex + 1) {
+    // if (sortedQuestions.length > questionIndex + 1) {
+    if (questionArray.length > questionIndex + 1) {
         questionContainerEl.setAttribute("style", "display: block;");
     } else {
         questionContainerEl.setAttribute("style", "display: none;");
@@ -166,53 +180,98 @@ function responseResult(element, correct) {
         timerInterval.textContent = "Timer: " + secondsLeft;
         responseEl.textContent = "Wrong!";
     }
-}
+};
 
-var submitButton = document.querySelector("#submit");
+function stopPropagation(e) {
+    e.stopPropagation();
+};
+
 var initialsInput = document.querySelector("#initials");
-var report = document.getElementById("score-container");
-var userInitialsSpan = document.getElementById("user-initials");
-var userScoreSpan = document.getElementById("user-score");
-var highsScoresList = document.getElementById("highscore-list");
+var highscoresForm = document.querySelector("#highscores-form")
+var highscoresList = document.querySelector("#highscores-list");
+var submitBtn = document.querySelector("#submit");
+var clearBtn = document.querySelector("#clear-scores");
 
+var highscores = [];
+
+// display high score
+// function renderHighScores() {
+
+//     // sets highscores to empty
+//     highscoresList.innerHTML = "";
+
+//     // a for loop creating a highscores list
+//     for (var i = 0; i < highscores.length; i++) {
+
+//         //each highscore has an indes in the highscores array
+//         var highscore = highscores[i];
+
+//         // txt content of high score create element
+//         var li = document.createElement("li");
+//         li.textContent = highscore;
+//         li.setAttribute("data-index", i);
+
+//         // append the list items to the highscores array
+//         highscoresList.appendChild(li);
+
+//         // create a button to clear the highscores
+
+//     };
+// };
+
+// initiliaze function that calls the render scores function
 function init() {
+
+    // pulls the highscores from the local storage, stored high scores variable
     var storedHighScores = JSON.parse(localStorage.getItem("userScore"));
-    if (storedHIghScores !== null) {
-        userScoreSpan === storedHighScores
-    }
-}
 
-// // save last score
-function saveLastScore() {
-    var userScore = {
-        initial: initialsInput.value,
-        score: myScore.value
-    }
-    localStorage.setItem("userScore", JSON.stringify(userScore)); 
-}
+    // if no highscores, pull from stored and print to screen
+    if (storedHighScores !== null) {
+        highscores === storedHighScores;
+    };
 
-// // display high score
-function renderHighScores() {
+    // show on the screen
+    // renderHighScores();
+};
 
-    var score = localStorage.getItem("score");
-    var name = localStorage.getItem("initials");
+// displays object highscores as a string in local files
+function savedHighscores() {
 
-    userInitialsSpan.textContent = name;
-    userScoreSpan.textContent = score;
-}
+    localStorage.setItem("userScore", JSON.stringify(userScore));
+};
 
-// // submit your score
-submit.addEventListener("click", function (event) {
+// submit your score to local storage on click
+submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
 
     // set variables for what will be saved
-    var score = myScore.textContent;
-    var name = initialsInput.value;
+    var userScore = {
+        initials: initialsInput.value,
+        score: myScore.textContent
+    };
 
     // save initials and score
-    localStorage.setItem("score", score);
-    localStorage.setItem("initials", name);
+    localStorage.setItem("userScore", JSON.stringify(userScore));
+
+    window.location.href = 'highscores.html'
 
     renderHighScores();
     saveLastScore();
 })
+
+// clearBtn.addEventListener("click", function (event) {
+
+//     if (true) {
+
+//         for (let index = 0; index < highscores.length; index++) {
+//             highscores.splice(index[i]);
+//         }
+
+//     };
+
+// })
+
+window.onload = function () {
+    init();
+}
+
