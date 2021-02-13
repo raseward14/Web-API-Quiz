@@ -182,6 +182,7 @@ function responseResult(element, correct) {
     }
 };
 
+// need to look closer at this function to end the quiz effectively
 function stopPropagation(e) {
     e.stopPropagation();
 };
