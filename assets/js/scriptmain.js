@@ -68,35 +68,27 @@ console.log("hey, good luck! hope you studied..");
 // rotate through question index on clicks, prompt new question
 answerButtons.addEventListener("click", () => {
     // if another question exists, ask it, otherwise, end game
-    // if (questionIndex < questionArray.length) {
     if (questionIndex < 4) {
-
         questionIndex++;
         askQuestion();
-        // console.log(questionArray.length)
     } else {
-        console.log('stop propagation');
-        // stopPropagation(timerInterval);
-        // setTime();
+        return;
     };
 
 });
 
 // start quiz function
 function startQuiz() {
-    console.log("started quiz");
     // start timer, hide welcome, show questions
     questionContainerEl.setAttribute("style", "display: block;");
     welcomeEl.classList.add("hide");
-
-    // random questions starting at index 0
+    // questions starting at index 0
     questionIndex = 0;
 
     // ask question and start time
     askQuestion();
     setTime();
-
-}
+};
 
 function setTime() {
     // set time interval
@@ -106,8 +98,9 @@ function setTime() {
         // if timer hits zero, end quiz, show report
         if (secondsLeft != null) {
             // keep running
-        } else if (condition) {
-
+            return;
+        } else if (questionIndex === 4) {
+            // stop the timer
         } if (secondsLeft === 0) {
             clearInterval(timerInterval);
             timerInterval.textContent = "Timer: " + secondsLeft;
@@ -141,15 +134,15 @@ function showQuestion(questionArray) {
         // run function to see if user choice is correct
         button.addEventListener("click", chooseCorrect);
         answerButtons.appendChild(button);
-    })
-}
+    });
+};
 
 // remove previous button elements while prior buttons exhist
 function resetState() {
     while (answerButtons.firstChild) {
         answerButtons.removeChild(answerButtons.firstChild)
-    }
-}
+    };
+};
 
 // check to see if user choice is correct
 function chooseCorrect(e) {
@@ -185,33 +178,10 @@ function responseResult(element, correct) {
     }
 };
 
-// need to look closer at this function to end the quiz effectively
-// function stopPropagation(e) {
-//     // we want the timer to stop, and the quiz to end
-//     e.stopPropagation();
-// };
-
 var initialsInput = document.querySelector("#initials");
 var highscoresForm = document.querySelector("#highscores-form");
 var submitBtn = document.querySelector("#submit");
 var clearBtn = document.querySelector("#clear-scores");
-
-// var highscores = [];
-
-// initiliaze function that calls the render scores function
-// function init() {
-
-//     // pulls the highscores from the local storage, stored high scores variable
-//     var storedHighScores = JSON.parse(localStorage.getItem("userScore"));
-
-//     // if no highscores, pull from stored and print to screen
-//     if (storedHighScores !== null) {
-//         highscores === storedHighScores;
-//     };
-
-// show on the screen
-// renderHighScores();
-// };
 
 // submit your score to local storage on click
 submitBtn.addEventListener("click", function (event) {
@@ -253,46 +223,4 @@ function savedHighscores() {
     return highscores;
 };
 
-// display high score
-function renderHighScores() {
-    console.log('im here');
-    // gets the highscores array
-    var highscores = savedHighscores();
-    // sets the highscores list inner html to empty
-    var highscoresList = document.querySelector('ul');
-    highscoresList.innerHTML = null;
-    // for each high score in the array, create a list item, text content is the text of the array item
-    for (let i = 0; i < highscores.length; i++) {
-        // each highscore has an indes in the highscores array
-        // var highscore = highscores[i];
-
-        // txt content of high score create element
-        var aScore = document.createElement("li");
-        aScore.textContent = highscores[i];
-        // li.setAttribute("data-index", i);
-
-        // append the list items to the highscores array
-        highscoresList.prepend(aScore);
-
-        // create a button to clear the highscores
-
-    };
-};
-
-
-
-// clearBtn.addEventListener("click", function (event) {
-
-//     if (true) {
-
-//         for (let index = 0; index < highscores.length; index++) {
-//             highscores.splice(index[i]);
-//         }
-
-//     };
-
-// })
-// window.onload = function () {
-//     renderHighScores();
-// }
 

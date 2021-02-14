@@ -1,10 +1,5 @@
-var initialsInput = document.querySelector("#initials");
-var highscoresForm = document.querySelector("#highscores-form")
 var highscoresList = document.querySelector("#highscores-list");
-var submitBtn = document.querySelector("#submit");
 var clearBtn = document.querySelector("#clear-scores");
-
-var highscores = [];
 
 // initiliaze function that calls the render scores function
 function savedHighscores() {
@@ -45,41 +40,21 @@ function renderHighScores() {
     };
 };
 
+clearBtn.addEventListener("click", function() {
+    console.log(highscores)
 
-// displays object highscores as a string in local files
-// function savedHighscores() {
+    // set highscores list to null clearing out all scores
+    highscoresList.innerHTML = null;
 
-//     localStorage.setItem("userScore", JSON.stringify(userScore)); 
-// };
+    // also need to clear the array
+    var highscores = savedHighscores();
+    if (highscores !== null) {
+        localStorage.clear();
+    } else {
+        highscores = [];
+    }
 
-// submit your score to local storage on click
-// submitBtn.addEventListener("click", function (event) {
-//     event.preventDefault();
-
-//     // set variables for what will be saved
-//     var userScore = {
-//         initials: initialsInput.value,
-//         score: myScore.textContent
-//     };
-
-//     // save initials and score
-//     localStorage.setItem("userScore", JSON.stringify(userScore));
-
-//     renderHighScores();
-//     saveLastScore();
-// })
-
-// clearBtn.addEventListener("click", function (event) {
-
-//     if (true) {
-
-//         for (let index = 0; index < highscores.length; index++) {
-//             highscores.splice(index[i]);
-//         }
-
-//     };
-
-// })
+})
 
 window.onload = function () {
     renderHighScores();
