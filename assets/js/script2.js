@@ -68,12 +68,16 @@ console.log("hey, good luck! hope you studied..");
 // rotate through question index on clicks, prompt new question
 answerButtons.addEventListener("click", () => {
     // if another question exists, ask it, otherwise, end game
-    if (questionIndex < questionArray.length) {
+    // if (questionIndex < questionArray.length) {
+    if (questionIndex < 4) {
+
         questionIndex++;
         askQuestion();
-        console.log(questionArray.length)
+        // console.log(questionArray.length)
     } else {
-        stopPropagation();
+        console.log('stop propagation');
+        // stopPropagation(timerInterval);
+        // setTime();
     };
 
 });
@@ -103,7 +107,7 @@ function setTime() {
         if (secondsLeft != null) {
             // keep running
         } else if (condition) {
-            
+
         } if (secondsLeft === 0) {
             clearInterval(timerInterval);
             timerInterval.textContent = "Timer: " + secondsLeft;
@@ -145,7 +149,6 @@ function resetState() {
     while (answerButtons.firstChild) {
         answerButtons.removeChild(answerButtons.firstChild)
     }
-    console.log(questionIndex);
 }
 
 // check to see if user choice is correct
@@ -183,67 +186,39 @@ function responseResult(element, correct) {
 };
 
 // need to look closer at this function to end the quiz effectively
-function stopPropagation(e) {
-    e.stopPropagation();
-};
+// function stopPropagation(e) {
+//     // we want the timer to stop, and the quiz to end
+//     e.stopPropagation();
+// };
 
 var initialsInput = document.querySelector("#initials");
-var highscoresForm = document.querySelector("#highscores-form")
-var highscoresList = document.querySelector("#highscores-list");
+var highscoresForm = document.querySelector("#highscores-form");
 var submitBtn = document.querySelector("#submit");
 var clearBtn = document.querySelector("#clear-scores");
 
-var highscores = [];
-
-// display high score
-// function renderHighScores() {
-
-//     // sets highscores to empty
-//     highscoresList.innerHTML = "";
-
-//     // a for loop creating a highscores list
-//     for (var i = 0; i < highscores.length; i++) {
-
-//         //each highscore has an indes in the highscores array
-//         var highscore = highscores[i];
-
-//         // txt content of high score create element
-//         var li = document.createElement("li");
-//         li.textContent = highscore;
-//         li.setAttribute("data-index", i);
-
-//         // append the list items to the highscores array
-//         highscoresList.appendChild(li);
-
-//         // create a button to clear the highscores
-
-//     };
-// };
+// var highscores = [];
 
 // initiliaze function that calls the render scores function
-function init() {
+// function init() {
 
-    // pulls the highscores from the local storage, stored high scores variable
-    var storedHighScores = JSON.parse(localStorage.getItem("userScore"));
+//     // pulls the highscores from the local storage, stored high scores variable
+//     var storedHighScores = JSON.parse(localStorage.getItem("userScore"));
 
-    // if no highscores, pull from stored and print to screen
-    if (storedHighScores !== null) {
-        highscores === storedHighScores;
-    };
+//     // if no highscores, pull from stored and print to screen
+//     if (storedHighScores !== null) {
+//         highscores === storedHighScores;
+//     };
 
-    // show on the screen
-    // renderHighScores();
-};
-
-// displays object highscores as a string in local files
-function savedHighscores() {
-
-    localStorage.setItem("userScore", JSON.stringify(userScore));
-};
+// show on the screen
+// renderHighScores();
+// };
 
 // submit your score to local storage on click
 submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
+
+    // this var is for the highscores in local storage that are strings, parse them into arrays in this function, get them
+    var highscores = savedHighscores();
 
     // set variables for what will be saved
     var userScore = {
@@ -251,14 +226,60 @@ submitBtn.addEventListener("click", function (event) {
         score: myScore.textContent
     };
 
-    // save initials and score
-    localStorage.setItem("userScore", JSON.stringify(userScore));
+    // push initials and score onto highscores array, and stringify highscores array in local storage
+    highscores.push(userScore);
+    localStorage.setItem("userScore", JSON.stringify(highscores));
 
-    window.location.href = 'highscores.html'
+    // moves to highscores page to render high scores
+    window.location.href = 'highscores.html';
 
     renderHighScores();
-    saveLastScore();
 })
+
+// displays object highscores as a string in local files
+function savedHighscores() {
+
+    var highscores = localStorage.getItem("userScore");
+
+    // if highscores exist in local storage, json parse into an array to be displayed
+    if (highscores !== null) {
+        highscores = JSON.parse(highscores);
+    }
+    // else cities array is empty
+    else {
+        highscores = [];
+    }
+    // returns highscores array for my highscores variable above
+    return highscores;
+};
+
+// display high score
+function renderHighScores() {
+    console.log('im here');
+    // gets the highscores array
+    var highscores = savedHighscores();
+    // sets the highscores list inner html to empty
+    var highscoresList = document.querySelector('ul');
+    highscoresList.innerHTML = null;
+    // for each high score in the array, create a list item, text content is the text of the array item
+    for (let i = 0; i < highscores.length; i++) {
+        // each highscore has an indes in the highscores array
+        // var highscore = highscores[i];
+
+        // txt content of high score create element
+        var aScore = document.createElement("li");
+        aScore.textContent = highscores[i];
+        // li.setAttribute("data-index", i);
+
+        // append the list items to the highscores array
+        highscoresList.prepend(aScore);
+
+        // create a button to clear the highscores
+
+    };
+};
+
+
 
 // clearBtn.addEventListener("click", function (event) {
 
@@ -271,8 +292,7 @@ submitBtn.addEventListener("click", function (event) {
 //     };
 
 // })
-
-window.onload = function () {
-    init();
-}
+// window.onload = function () {
+//     renderHighScores();
+// }
 

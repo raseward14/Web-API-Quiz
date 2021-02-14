@@ -156,6 +156,15 @@ h1 {
     display: none;
 }
 
+.highscore {
+    background-color: white;
+    text-align: left;
+    border-radius: 3px;
+    padding: 5px 5px 5px 15px;
+    font-size: large;
+    font-weight: bold;
+}
+
 
 
 

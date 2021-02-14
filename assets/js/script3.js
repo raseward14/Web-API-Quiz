@@ -6,51 +6,51 @@ var clearBtn = document.querySelector("#clear-scores");
 
 var highscores = [];
 
+// initiliaze function that calls the render scores function
+function savedHighscores() {
+
+    var highscores = localStorage.getItem("userScore");
+
+    // if highscores exist in local storage, json parse into an array to be displayed
+    if (highscores !== null) {
+        highscores = JSON.parse(highscores);
+    }
+    // else cities array is empty
+    else {
+        highscores = [];
+    }
+    // returns highscores array for my highscores variable above
+    return highscores;
+};
+
+
 // display high score
 function renderHighScores() {
-
-    // sets highscores to empty
+    // get highscores array
+    var highscores = savedHighscores();
+    // sets highscores list inner html to empty
     highscoresList.innerHTML = "";
-
+    console.log(highscores)
     // a for loop creating a highscores list
-    for (var i = 0; i < highscores.length; i++) {
-
+    for (let i = 0; i < highscores.length; i++) {
         //each highscore has an indes in the highscores array
-        var highscore = highscores[i];
-
-        // txt content of high score create element
-        var li = document.createElement("li");
-        li.textContent = highscore;
-        li.setAttribute("data-index", i);
-
+        var aHighScore = document.createElement("p");
+        aHighScore.textContent = highscores[i].initials + ' ' + highscores[i].score;
+        aHighScore.setAttribute("data-index", i);
+        aHighScore.classList.add('highscore')
         // append the list items to the highscores array
-        highscoresList.appendChild(li);
-
+        highscoresList.prepend(aHighScore);
         // create a button to clear the highscores
-        
+
     };
 };
 
-// initiliaze function that calls the render scores function
-function init() {
-
-    // pulls the highscores from the local storage, stored high scores variable
-    var storedHighScores = JSON.parse(localStorage.getItem("userScore"));
-
-    // if no highscores, pull from stored and print to screen
-    if (storedHighScores !== null) {
-        highscores === storedHighScores;
-    };
-
-    // show on the screen
-    renderHighScores();
-};
 
 // displays object highscores as a string in local files
-function savedHighscores() {
-    
-    localStorage.setItem("userScore", JSON.stringify(userScore)); 
-};
+// function savedHighscores() {
+
+//     localStorage.setItem("userScore", JSON.stringify(userScore)); 
+// };
 
 // submit your score to local storage on click
 // submitBtn.addEventListener("click", function (event) {
@@ -78,9 +78,9 @@ function savedHighscores() {
 //         }
 
 //     };
-    
+
 // })
 
 window.onload = function () {
-    init();
+    renderHighScores();
 }
